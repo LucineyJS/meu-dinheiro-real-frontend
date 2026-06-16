@@ -11,6 +11,14 @@ jobs:
       steps:
         - name: Checkout do Código
           uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+
+        - name: Escanear por Chaves Expostas (Gitleaks)
+          uses: gitleaks/gitleaks-action@v2
+          continue-on-error: true
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Configurar Node.js
           uses: actions/setup-node@v4
