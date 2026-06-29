@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Isso garante que o app tenha a altura da tela toda */
+  overflow: hidden; /* Evita barras de rolagem duplas */
+}
