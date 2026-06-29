@@ -1,0 +1,48 @@
+<div class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Novo Lançamento</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        
+        <!-- Descrição -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descrição</mat-label>
+          <input matInput formControlName="descricao" placeholder="Ex: Almoço">
+        </mat-form-field>
+
+        <!-- Valor -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Valor (R$)</mat-label>
+          <input matInput type="number" formControlName="valor" placeholder="0.00">
+        </mat-form-field>
+
+        <!-- Tipo -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo">
+            <mat-option value="DESPESA">Despesa</mat-option>
+            <mat-option value="RECEITA">Receita</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Categoria -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="idCategoria">
+            <!-- *ngFor para listar as categorias reais da API -->
+            <mat-option *ngFor="let cat of categorias" [value]="cat.idCategoria">
+                {{ cat.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="full-width">
+          Salvar Lançamento
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
