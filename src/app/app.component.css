@@ -1,0 +1,26 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ocupa toda a tela */
+}
+
+.sidenav-container { 
+    flex: 1;
+    overflow: auto; 
+}
+
+.sidnav-menu {
+    padding: 20px;
+}
+
+.sidenav-content { 
+    padding-bottom: 60px;; 
+}
+
+.bottom-nav {
+  height: 64px; 
+  flex-shrink: 0;
+  justify-content: space-around;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}

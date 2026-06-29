@@ -1,0 +1,29 @@
+<div class="main-wrapper">
+  <mat-sidenav-container class="sidenav-container">
+     <!-- O Sidenav (o menu lateral) -->
+     <mat-sidenav #sidenav mode="over" opened="false">
+      <div class="sidnav-menu">
+        <h3>Menu</h3>
+          <!-- Botão de Logout -->
+        <button mat-button color="warn" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon> Sair
+        </button>
+      </div>
+    </mat-sidenav>
+    <!-- Conteúdo Principal -->
+    <mat-sidenav-content class="sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+    <!--Toolbar - Navegação Inferior (Fixa no Mobile) -->
+  <mat-toolbar class="bottom-nav">
+      <button mat-icon-button routerLink="/dashboard"><mat-icon>dashboard</mat-icon></button>
+      <button mat-icon-button routerLink="/lancamentos"><mat-icon>add_circle_outline</mat-icon></button>
+      <button mat-icon-button routerLink="/categorias"><mat-icon>list</mat-icon></button>
+      <button mat-icon-button routerLink="/relatorios"><mat-icon>pie_chart</mat-icon></button>
+    
+      <button mat-icon-button (click)="logout()" color="warn" title="Sair">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </mat-toolbar>
+</div>
