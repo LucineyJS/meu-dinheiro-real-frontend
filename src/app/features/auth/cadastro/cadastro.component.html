@@ -1,0 +1,65 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <mat-card-header>
+      <mat-card-title>Meu Dinheiro Real - Criar Conta</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="auth-form">
+        
+        <!-- Campo: Nome -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput formControlName="nome" type="text" placeholder="Digite seu nome">
+          <mat-icon matSuffix>person</mat-icon>
+          @if (cadastroForm.get('nome')?.hasError('required') && cadastroForm.get('nome')?.touched) {
+            <mat-error>O nome é obrigatório</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo: E-mail -->
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="exemplo@email.com">
+          <mat-icon matSuffix>email</mat-icon>
+          @if (cadastroForm.get('email')?.hasError('email') && cadastroForm.get('email')?.touched) {
+            <mat-error>Insira um e-mail válido</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo: Senha -->
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="senhaHash" [type]="esconderSenha() ? 'password' : 'text'">
+          <button type="button" mat-icon-button matSuffix (click)="esconderSenha.set(!esconderSenha())" [attr.aria-label]="'Esconder senha'" [attr.aria-pressed]="esconderSenha()">
+            <mat-icon>{{ esconderSenha() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (cadastroForm.get('senhaHash')?.hasError('minlength')) {
+            <mat-error>A senha deve ter no mínimo 4 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo: Confirmação de Senha -->
+        <mat-form-field appearance="outline">
+          <mat-label>Confirme a Senha</mat-label>
+          <input matInput formControlName="confirmarSenha" [type]="esconderConfirmacao() ? 'password' : 'text'">
+          <button type="button" mat-icon-button matSuffix (click)="esconderConfirmacao.set(!esconderConfirmacao())">
+            <mat-icon>{{ esconderConfirmacao() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (cadastroForm.get('confirmarSenha')?.hasError('passwordsDontMatch')) {
+            <mat-error>As senhas não coincidem</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Botão de Envio -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="cadastroForm.invalid">
+          Finalizar Cadastro
+        </button>
+      </form>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <a routerLink="/login">Já possui login? Faça o acesso aqui</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
