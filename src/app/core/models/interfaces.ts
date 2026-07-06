@@ -15,14 +15,14 @@ export interface AuthResponse {
 }
 
 export interface Categoria {
-  id?: number;
+  idCategoria?: number;
   nome: string;
   tipo: 'RECEITA' | 'DESPESA';
   icone: string;
 }
 
 export interface Lancamento {
-  id?: number;
+  idLancamento?: number;
   valor: number;
   descricao: string;
   tipo: 'RECEITA' | 'DESPESA';
