@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Nova Categoria ({{ data.tipo | titlecase }})</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Nome da Categoria</mat-label>
+    <input matInput formControlName="nome" placeholder="Ex: Cinema, Investimentos" autocomplete="off">
+    <mat-error *ngIf="form.get('nome')?.hasError('required')">O nome é obrigatório.</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="salvar()">Salvar</button>
+</mat-dialog-actions>
