@@ -1,48 +1,59 @@
-<div class="form-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Novo Lançamento</mat-card-title>
-    </mat-card-header>
+<div class="container-form">
+  <form [formGroup]="formLancamento" (ngSubmit)="salvarLancamento()">
+    
+    <!-- Campo: Descrição -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descrição</mat-label>
+      <input matInput formControlName="descricao" placeholder="Ex: Mercado Central">
+      <mat-error *ngIf="formLancamento.get('descricao')?.hasError('required')">
+        A descrição é obrigatória.
+      </mat-error>
+    </mat-form-field>
 
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Campo: Valor -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="valor" placeholder="0,00">
+      <span matTextPrefix>R$&nbsp;</span>
+      <mat-error *ngIf="formLancamento.get('valor')?.hasError('required')">
+        O valor é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo: Tipo (Despesa / Receita) -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Tipo de Lançamento</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option value="DESPESA">Despesa</mat-option>
+        <mat-option value="RECEITA">Receita</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Campo: Categoria Filtrada -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="categoriaId" (selectionChange)="onCategoriaSelection($event.value)">
+        <mat-option *ngFor="let cat of categoriasFiltradas" [value]="cat.idCategoria">
+          {{ cat.nome }}
+        </mat-option>
         
-        <!-- Descrição -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Descrição</mat-label>
-          <input matInput formControlName="descricao" placeholder="Ex: Almoço">
-        </mat-form-field>
+        <mat-divider></mat-divider>
+        
+        <mat-option value="NOVA_CATEGORIA" class="opcao-nova-categoria">
+          <mat-icon color="primary">add</mat-icon>
+          <strong>Cadastrar nova categoria...</strong>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formLancamento.get('categoriaId')?.hasError('required')">
+        Selecione uma categoria.
+      </mat-error>
+    </mat-form-field>
 
-        <!-- Valor -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Valor (R$)</mat-label>
-          <input matInput type="number" formControlName="valor" placeholder="0.00">
-        </mat-form-field>
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="formLancamento.invalid">
+        Salvar Lançamento
+      </button>
+    </div>
 
-        <!-- Tipo -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Tipo</mat-label>
-          <mat-select formControlName="tipo">
-            <mat-option value="DESPESA">Despesa</mat-option>
-            <mat-option value="RECEITA">Receita</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <!-- Categoria -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Categoria</mat-label>
-          <mat-select formControlName="idCategoria">
-            <!-- *ngFor para listar as categorias reais da API -->
-            <mat-option *ngFor="let cat of categorias" [value]="cat.idCategoria">
-                {{ cat.nome }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="full-width">
-          Salvar Lançamento
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+  </form>
 </div>

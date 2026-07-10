@@ -1,14 +1,25 @@
-.form-container {
-  padding: 16px;
+.container-form {
   max-width: 500px;
-  margin: 0 auto;
-}
-
-.full-width {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-mat-card {
+  margin: 24px auto;
   padding: 16px;
+}
+
+.w-full {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.opcao-nova-categoria {
+  color: #3f51b5; /* Cor padrão primária do material */
+}
+
+.opcao-nova-categoria mat-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
 }
