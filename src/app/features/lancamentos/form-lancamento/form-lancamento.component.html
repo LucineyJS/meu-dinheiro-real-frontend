@@ -1,6 +1,7 @@
+
 <div class="container-form">
   <form [formGroup]="formLancamento" (ngSubmit)="salvarLancamento()">
-    
+    <h2>Cadastrar Lançamento</h2>
     <!-- Campo: Descrição -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Descrição</mat-label>
@@ -32,7 +33,7 @@
     <!-- Campo: Categoria Filtrada -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Categoria</mat-label>
-      <mat-select formControlName="categoriaId" (selectionChange)="onCategoriaSelection($event.value)">
+      <mat-select formControlName="idCategoria" (selectionChange)="onCategoriaSelection($event.value)">
         <mat-option *ngFor="let cat of categoriasFiltradas" [value]="cat.idCategoria">
           {{ cat.nome }}
         </mat-option>
@@ -44,7 +45,7 @@
           <strong>Cadastrar nova categoria...</strong>
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="formLancamento.get('categoriaId')?.hasError('required')">
+      <mat-error *ngIf="formLancamento.get('idCategoria')?.hasError('required')">
         Selecione uma categoria.
       </mat-error>
     </mat-form-field>
@@ -56,4 +57,7 @@
     </div>
 
   </form>
+
+  <hr class="my-4"> <app-lista-lancamentos></app-lista-lancamentos>
+
 </div>

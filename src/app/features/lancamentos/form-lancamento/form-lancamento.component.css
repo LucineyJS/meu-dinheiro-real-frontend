@@ -1,7 +1,11 @@
 .container-form {
   max-width: 500px;
   margin: 24px auto;
-  padding: 16px;
+  padding: 16px;  
+}
+
+h2 {
+  margin: 5px;
 }
 
 .w-full {
@@ -22,4 +26,5 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
+  margin-bottom: 16px;
 }

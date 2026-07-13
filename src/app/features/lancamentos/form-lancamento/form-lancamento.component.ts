@@ -18,7 +18,7 @@ import { NovaCategoriaDialogComponent } from '../../categorias/nova-categoria-di
 // Importação do serviço e das interfaces unificadas
 import { ApiService } from '../../../core/services/api.service'; 
 import { Categoria, Lancamento } from '../../../core/models/interfaces';
-
+import { ListaLancamentosComponent} from '../lista-lancamentos/lista-lancamentos.component';
 @Component({
   selector: 'app-form-lancamento',
   standalone: true,
@@ -30,7 +30,8 @@ import { Categoria, Lancamento } from '../../../core/models/interfaces';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    ListaLancamentosComponent
   ],
   templateUrl: './form-lancamento.component.html',
   styleUrls: ['./form-lancamento.component.css']
@@ -169,5 +170,5 @@ private abrirModalNovaCategoria(): void {
         error: (err: unknown) => console.error('Erro ao salvar lançamento:', err)
       });
     }
-  }
+  }  
 }
