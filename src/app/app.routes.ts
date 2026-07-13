@@ -26,11 +26,17 @@ export const routes: Routes = [
     canActivate: [authGuard] 
   },
   { 
-    path: 'lancamentos', 
+    path: 'lancamentos/cadastro', 
     loadComponent: () => import('./features/lancamentos/form-lancamento/form-lancamento.component')
       .then(m => m.FormLancamentoComponent),
     canActivate: [authGuard] 
   },
+    { 
+    path: 'lancamentos/lista', 
+    loadComponent: () => import('./features/lancamentos/lista-lancamentos/lista-lancamentos.component')
+      .then(m => m.ListaLancamentosComponent),
+    canActivate: [authGuard] 
+  },  
   { 
     path: 'relatorios', 
     loadComponent: () => import('./features/relatorios/relatorios.component')

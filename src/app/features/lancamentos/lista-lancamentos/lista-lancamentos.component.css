@@ -1,0 +1,40 @@
+.tabela-container {
+  margin: 10px;
+  overflow-x: auto;
+  border-radius: 8px;
+  
+}
+h2 {
+  margin: 15px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.texto-receita {
+  color: #2e7d32; /* Verde */
+  font-weight: 500;
+}
+
+.texto-despesa {
+  color: #c62828; /* Vermelho */
+  font-weight: 500;
+}
+
+.badge-receita {
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
+}
+
+.badge-despesa {
+  background-color: #ffebee !important;
+  color: #c62828 !important;
+}
+
+.sem-dados {
+  padding: 24px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: italic;
+}
