@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Editar Lançamento</h2>
+
+<mat-dialog-content [formGroup]="form">
+  
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Descrição</mat-label>
+    <input matInput formControlName="descricao" placeholder="Ex: Mercado Central">
+    <mat-error *ngIf="form.get('descricao')?.hasError('required')">A descrição é obrigatória.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Valor</mat-label>
+    <input matInput 
+           type="text" 
+           formControlName="valor" 
+           placeholder="0,00"
+           (blur)="formatarAoPerderFoco()">
+    <span matTextPrefix>R$&nbsp;</span>
+    <mat-error *ngIf="form.get('valor')?.hasError('required')">O valor é obrigatório.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="tipo">
+      <mat-option value="DESPESA">Despesa</mat-option>
+      <mat-option value="RECEITA">Receita</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="idCategoria">
+      <mat-option *ngFor="let cat of categoriasFiltradas" [value]="cat.idCategoria">
+        {{ cat.nome }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('idCategoria')?.hasError('required')">A categoria é obrigatória.</mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="salvar()">Salvar Alterações</button>
+</mat-dialog-actions>

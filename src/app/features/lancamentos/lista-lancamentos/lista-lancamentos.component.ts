@@ -9,10 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 // Serviços e Interfaces do projeto
 import { ApiService } from '../../../core/services/api.service';
 import { Lancamento } from '../../../core/models/interfaces';
+import { EditarLancamentoDialogComponent } from '../editar-lancamento-dialog/editar-lancamento-dialog.component';
+
 
 @Component({
   selector: 'app-lista-lancamentos',
@@ -33,9 +36,10 @@ export class ListaLancamentosComponent implements OnInit {
   private apiService = inject(ApiService);
   private destroyRef = inject(DestroyRef);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   // Colunas que serão exibidas na tabela
-  displayedColumns: string[] = ['descricao', 'valor', 'dataLancamento', 'acoes'];
+  displayedColumns: string[] = ['descricao', 'categoria', 'valor', 'dataLancamento', 'acoes'];
   dataSource: Lancamento[] = [];
   carregando = false;
 
@@ -61,9 +65,29 @@ export class ListaLancamentosComponent implements OnInit {
   }
 
   editarLancamento(lancamento: Lancamento): void {
-    // Aqui no futuro abrir o modal para edição do lançamento 
-    this.mostrarNotificacao(`Abrir edição para: ${lancamento.descricao}`);
-    console.log('Editar:', lancamento);
+    const dialogRef = this.dialog.open(EditarLancamentoDialogComponent, {
+      width: '450px',
+      data: { lancamento: lancamento },
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe((lancamentoAtualizado: Lancamento | undefined) => {
+      if (lancamentoAtualizado) {
+        // Chama o método PUT do apiService para salvar no banco
+        this.apiService.atualizarLancamento(lancamentoAtualizado.idLancamento!, lancamentoAtualizado)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe({
+            next: () => {
+              this.mostrarNotificacao('Lançamento atualizado com sucesso!');
+              this.carregarLancamentos(); // Atualiza a tabela dinamicamente sem recarregar a página
+            },
+            error: (err: unknown) => {
+              console.error('Erro ao atualizar lançamento:', err);
+              this.mostrarNotificacao('Erro ao salvar as alterações no banco.');
+            }
+          });
+      }
+    });   
   }
 
   deletarLancamento(lancamento: Lancamento): void {

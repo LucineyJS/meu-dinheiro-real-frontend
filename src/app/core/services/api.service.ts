@@ -11,7 +11,7 @@ export class ApiService {
   private readonly API = 'http://localhost:8081/api';
 
   // Métodos de Categorias
- listarCategorias(): Observable<Categoria[]> { 
+  listarCategorias(): Observable<Categoria[]> { 
     return this.http.get<Categoria[]>(`${this.API}/categorias`); 
   }
   criarCategoria(data: Categoria): Observable<Categoria> { 
@@ -25,7 +25,7 @@ export class ApiService {
   }
   
   // Métodos de Lançamentos
-   listarLancamentos(): Observable<Lancamento[]> { 
+  listarLancamentos(): Observable<Lancamento[]> { 
     return this.http.get<Lancamento[]>(`${this.API}/lancamentos`); 
   }
   criarLancamento(data: Lancamento): Observable<Lancamento> { 

@@ -29,4 +29,5 @@ export interface Lancamento {
   dataLancamento: string;
   status: 'EFETIVADO' | 'PENDENTE';
   idCategoria: number;
+  nomeCategoria?: string;
 }
