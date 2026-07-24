@@ -1,0 +1,39 @@
+.w-full {
+  width: 100%;
+}
+
+/* Container do item selecionado dentro do input */
+.icone-select-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: calc(100% - 20px); /* Evita sobrepor a seta do select */
+  overflow: hidden;
+}
+
+/* Container das opções dentro do menu suspenso */
+.icone-opcao-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Fix para garantir que o ícone mantenha dimensões corretas */
+.icone-mat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* Texto ajustado para adicionar reticências caso o espaço seja menor */
+.icone-texto {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}

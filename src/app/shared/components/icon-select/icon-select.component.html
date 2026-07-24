@@ -1,0 +1,23 @@
+<mat-form-field [formGroup]="parentForm" appearance="outline" class="w-full">
+  <mat-label>Selecione um Ícone</mat-label>
+
+  <mat-select [formControlName]="controlName">
+    <!-- Exibição do item selecionado -->
+    <mat-select-trigger>
+      <div class="icone-select-container">
+        <mat-icon class="icone-mat">{{ valorSelecionado }}</mat-icon>
+        <span class="icone-texto">{{ getNomeExibicaoIcone(valorSelecionado) }}</span>
+      </div>
+    </mat-select-trigger>
+
+    <!-- Lista de opções -->
+    @for (item of listaIcones; track item.nome) {
+      <mat-option [value]="item.nome">
+        <div class="icone-opcao-container">
+          <mat-icon class="icone-mat">{{ item.nome }}</mat-icon>
+          <span>{{ item.exibicao }}</span>
+        </div>
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
